@@ -1,16 +1,31 @@
 import { UseCaseOneComponent } from './components/UseCaseOne/UseCaseOneComponent';
 import './App.css';
 import UseCaseTwoComponent from './components/UseCaseTwo/UseCaseTwoComponent';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
+import Navbar from './components/RoutingApp/Navbar';
+import Products from './components/RoutingApp/Products';
+import Posts from './components/RoutingApp/Posts';
+import Dashboard from './components/RoutingApp/admin/Dashboard';
+import Home from './components/RoutingApp/Home';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello CME React Mumbai</h1>
-      <hr />
-      {/* <UseCaseOneComponent /> */}
-      <UseCaseTwoComponent />
+    <BrowserRouter>
+      <div className="App">
+        <Navbar />
+        <div>
+          <Switch>
+            <Route path="/products" component={Products} />
+            <Route path="/posts" component={Posts} />
+            <Route path="/admin" component={Dashboard} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </div>
 
-    </div>
+
+      </div>
+    </BrowserRouter>
   );
 }
 
