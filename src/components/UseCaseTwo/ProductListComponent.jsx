@@ -14,6 +14,28 @@ export default function ProductListComponent() {
 
     const [products, setProducts] = useState(productList)
 
+    const handleIncrement = (product) => {
+        const productsClone = [...products]
+        const index = productsClone.indexOf(product)
+        productsClone[index] = { ...product }
+        productsClone[index].quantity++
+        setProducts(productsClone)
+    }
+
+    const handleDecrement = (product) => {
+        const productsClone = [...products]
+        const index = productsClone.indexOf(product)
+        productsClone[index] = { ...product }
+        productsClone[index].quantity--
+        setProducts(productsClone)
+    }
+
+    const removeFromCart = (productIdToBeRemoved) => {
+        const filteredProducts = 
+        products.filter((product) => (product.id != productIdToBeRemoved))
+        setProducts(filteredProducts)
+    }
+
 
 
     return (
@@ -23,9 +45,14 @@ export default function ProductListComponent() {
                 products.map((product) =>
                     <ProductComponent
                         key={product.id}
-                        name={product.name}
-                        quantity={product.quantity}
-                        id={product.id}
+                        product={product}
+                        onIncrement={handleIncrement}
+                        onDecrement={handleDecrement}
+                        removeFromCart={removeFromCart}
+                    // name={product.name}
+                    // quantity={product.quantity}
+                    // id={product.id}
+
                     />
                 )
             }
