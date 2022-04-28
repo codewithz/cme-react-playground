@@ -53,6 +53,15 @@ export default function PostComponent() {
         setPosts(postsClone)
     }
 
+    const handleDelete = async (post) => {
+        const promise = axios.delete(`${apiEndPoint}/${post.id}`)
+        const result = await promise;
+
+        console.log(result)
+
+        const updatedPosts = posts.filter(p => p.id !== post.id)
+        setPosts(updatedPosts)
+    }
 
 
 
@@ -86,7 +95,9 @@ export default function PostComponent() {
                                     </button>
                                 </td>
                                 <td>
-                                    <button className='btn btn-sm btn-danger m-2'>
+                                    <button className='btn btn-sm btn-danger m-2'
+                                        onClick={() => handleDelete(post)}
+                                    >
                                         Delete
                                     </button>
                                 </td>
