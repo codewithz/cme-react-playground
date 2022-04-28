@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 export default function PostComponent() {
 
@@ -8,13 +9,32 @@ export default function PostComponent() {
         { id: 3, title: "Title something" },
         { id: 4, title: "Title something" },
     ]
-
+    
     const [posts, setPosts] = useState(postsList)
+
+    useEffect(() => {
+        getPosts()
+    })
+
+    const getPosts = async () => {
+
+        const promise = axios.get('https://jsonplaceholder.typicode.com/posts')
+        console.log(promise)
+
+        const result = await promise;
+        const { data } = result
+        setPosts(data)
+        console.log(result)
+
+    }
+
+ 
+
 
     return (
         <div>
-            <button className='btn btn-primary' 
-            style={{ marginBottom: 20 }}>
+            <button className='btn btn-primary'
+                style={{ marginBottom: 20 }}>
                 Add
             </button>
 
@@ -28,7 +48,7 @@ export default function PostComponent() {
                 </thead>
                 <tbody>
                     {
-                        posts.map((post)=>(
+                        posts.map((post) => (
                             <tr key={post.id}>
                                 <td>{post.title}</td>
                                 <td>
