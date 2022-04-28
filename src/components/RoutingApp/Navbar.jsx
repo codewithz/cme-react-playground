@@ -41,6 +41,9 @@ export default function Navbar() {
                     <li class="nav-item">
                         <Link className="nav-link" to="/counter">Counter</Link>
                     </li>
+                    <li class="nav-item">
+                        <Link className="nav-link" to="/http-posts">HTTP Calls</Link>
+                    </li>
 
 
                 </ul>

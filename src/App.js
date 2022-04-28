@@ -11,6 +11,7 @@ import Home from './components/RoutingApp/Home';
 import ProductDetails from './components/RoutingApp/ProductDetails';
 import NotFound from './components/RoutingApp/NotFound';
 import Counter from './components/UseEffectExample/Counter';
+import PostComponent from './components/HttpExample/PostComponent';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/admin" component={Dashboard} />
             <Route path="/not-found" component={NotFound} />
             <Route path="/counter" component={Counter} />
+            <Route path="/http-posts" component={PostComponent} />
             <Route path="/" exact component={Home} />
             <Redirect to="/not-found" />
           </Switch>
