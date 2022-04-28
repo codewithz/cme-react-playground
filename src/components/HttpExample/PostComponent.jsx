@@ -34,6 +34,11 @@ export default function PostComponent() {
         const newPost = { title: 'My Title', body: 'Body for Blog Post' }
         const result = await axios.post(apiEndPoint, newPost)
         console.log(result)
+        console.log("Status:", result.status)
+        console.log("Data:", result.data)
+        const addedPost = result.data
+        const postsClone = [addedPost, ...posts]
+        setPosts(postsClone)
     }
 
 
