@@ -14,6 +14,7 @@ import ProductDetails from './components/RoutingApp/ProductDetails';
 import NotFound from './components/RoutingApp/NotFound';
 import Counter from './components/UseEffectExample/Counter';
 import PostComponent from './components/HttpExample/PostComponent';
+import LoginForm from './components/FormsComponent/LoginForm';
 
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/not-found" component={NotFound} />
             <Route path="/counter" component={Counter} />
             <Route path="/http-posts" component={PostComponent} />
+            <Route path="/login" component={LoginForm} />
             <Route path="/" exact component={Home} />
             <Redirect to="/not-found" />
           </Switch>

@@ -44,6 +44,9 @@ export default function Navbar() {
                     <li class="nav-item">
                         <Link className="nav-link" to="/http-posts">HTTP Calls</Link>
                     </li>
+                    <li class="nav-item">
+                        <Link className="nav-link" to="/login">Login</Link>
+                    </li>
 
 
                 </ul>
