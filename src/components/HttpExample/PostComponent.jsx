@@ -1,19 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import http from '../services/HttpService'
 
-// axios.interceptors.response.use(whatDoToWhenSuccess,whatToDoWhenFailure)
-axios.interceptors.response.use(null, (error) => {
-    const expectedErrors = error.response &&
-        error.response.status >= 400 &&
-        error.response.status < 500
 
-    if (!expectedErrors) {
-        console.log("Logging the error:", error)
-        alert("Something went wrong - Global!!")
-    }
-
-    return Promise.reject(error)
-})
 
 export default function PostComponent() {
 
@@ -34,7 +22,7 @@ export default function PostComponent() {
 
     const getPosts = async () => {
 
-        const promise = axios.get(apiEndPoint)
+        const promise = http.get(apiEndPoint)
         console.log(promise)
 
         const result = await promise;
@@ -46,7 +34,7 @@ export default function PostComponent() {
 
     const handleAdd = async () => {
         const newPost = { title: 'My Title', body: 'Body for Blog Post' }
-        const result = await axios.post(apiEndPoint, newPost)
+        const result = await http.post(apiEndPoint, newPost)
         console.log(result)
         console.log("Status:", result.status)
         console.log("Data:", result.data)
@@ -56,20 +44,30 @@ export default function PostComponent() {
     }
 
     const handleUpdate = async (post) => {
-        post.title = "Updated Post Title for Post-" + post.id
+        try {
+            post.title = "Updated Post Title for Post-" + post.id
 
-        const promise = axios.put(`${apiEndPoint}/${post.id}`, post)
-        const result = await promise;
+            const promise = http.put(`${apiEndPoint}/${post.id}`, post)
+            const result = await promise;
 
-        const postsClone = [...posts]
-        const index = postsClone.indexOf(post)
-        postsClone[index] = { ...post }
-        setPosts(postsClone)
+            const postsClone = [...posts]
+            const index = postsClone.indexOf(post)
+            postsClone[index] = { ...post }
+            setPosts(postsClone)
+        }
+        catch (error) {
+            console.log(error)
+            //  Expected Error (404:not found, 400: bad message) -- Client
+            // --> Display a specific error message
+            if (error.response && error.response.status === 404) {
+                alert("This post is already deleted")
+            }
+        }
     }
 
     const handleDelete = async (post) => {
         try {
-            const promise = axios.delete(`z${apiEndPoint}/${post.id}`)
+            const promise = http.delete(`z${apiEndPoint}/${post.id}`)
             const result = await promise;
 
             console.log(result)
