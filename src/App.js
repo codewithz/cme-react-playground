@@ -3,6 +3,8 @@ import './App.css';
 import UseCaseTwoComponent from './components/UseCaseTwo/UseCaseTwoComponent';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
+import { ToastContainer } from 'react-toastify';
+
 import Navbar from './components/RoutingApp/Navbar';
 import Products from './components/RoutingApp/Products';
 import Posts from './components/RoutingApp/Posts';
@@ -13,10 +15,13 @@ import NotFound from './components/RoutingApp/NotFound';
 import Counter from './components/UseEffectExample/Counter';
 import PostComponent from './components/HttpExample/PostComponent';
 
+import 'react-toastify/dist/ReactToastify.css'
+
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <ToastContainer />
         <Navbar />
         <div>
           <Switch>
@@ -32,9 +37,8 @@ function App() {
           </Switch>
         </div>
 
-
       </div>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 

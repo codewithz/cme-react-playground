@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import http from '../services/HttpService'
 import config from '../../config.json'
 import otherConfig from '../../otherConfig.json'
+import { toast } from 'react-toastify'
 
 export default function PostComponent() {
 
@@ -34,6 +35,7 @@ export default function PostComponent() {
         const { data } = result
         setPosts(data)
         console.log(result)
+        toast.success("Data loaded successfully")
 
     }
 
@@ -46,6 +48,7 @@ export default function PostComponent() {
         const addedPost = result.data
         const postsClone = [addedPost, ...posts]
         setPosts(postsClone)
+        toast.success("Post Added successfully")
     }
 
     const handleUpdate = async (post) => {
@@ -59,6 +62,7 @@ export default function PostComponent() {
             const index = postsClone.indexOf(post)
             postsClone[index] = { ...post }
             setPosts(postsClone)
+            toast.success("Post Updated successfully")
         }
         catch (error) {
             console.log(error)
