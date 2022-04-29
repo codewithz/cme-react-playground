@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
+// axios.interceptors.response.use(whatDoToWhenSuccess,whatToDoWhenFailure)
+axios.interceptors.response.use(null, (error) => {
+    const expectedErrors = error.response &&
+        error.response.status >= 400 &&
+        error.response.status < 500
+
+    if (!expectedErrors) {
+        console.log("Logging the error:", error)
+        alert("Something went wrong - Global!!")
+    }
+
+    return Promise.reject(error)
+})
+
 export default function PostComponent() {
 
     const apiEndPoint = 'https://jsonplaceholder.typicode.com/posts'
@@ -74,10 +88,11 @@ export default function PostComponent() {
             // Unexpected Error (Network Down, Server Down, DB Down, Bug) - Server Side Errors
             // --> Log It
             // --> Display a generic message
-            else {
-                console.log("Logging the error:", error)
-                alert("Something went wrong!!")
-            }
+            // else {
+            //     console.log("Logging the error:", error)
+            //     alert("Something went wrong!!")
+            // }
+            // Handled Globally
         }
     }
 
