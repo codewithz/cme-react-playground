@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import TextInput from '../common/TextInput'
 
 export default function LoginForm() {
     const [account, setAccount] = useState({ username: 'codewithz', password: '' })
@@ -21,26 +22,19 @@ export default function LoginForm() {
         <div>
             <h1>LoginForm</h1>
             <form>
-                <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        className='form-control'
-                        id='username'
-                        name='username'
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        className='form-control'
-                        id='password'
-                        name='password'
-                        onChange={handleChange}
-                    />
-                </div>
+
+                <TextInput
+                    name="username"
+                    label="Username"
+                    type="text"
+                    onChange={handleChange} />
+
+                <TextInput
+                    name="password"
+                    label="Password"
+                    type="password"
+                    onChange={handleChange} />
+
                 <button className="btn btn-warning btn-sm m-2">Login</button>
             </form>
 
