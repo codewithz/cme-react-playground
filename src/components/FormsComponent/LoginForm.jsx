@@ -31,6 +31,7 @@ export default function LoginForm() {
         event.preventDefault();
 
         const errors = validate()
+        setErrors(errors)
         console.log(errors)
 
         if (errors) return;
