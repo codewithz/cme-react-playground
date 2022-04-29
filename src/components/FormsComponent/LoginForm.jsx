@@ -5,23 +5,25 @@ export default function LoginForm() {
     const [account, setAccount] = useState({ username: 'codewithz', password: '' })
 
     const handleChange = (event) => {
-        console.log("Event:", event)
+        // console.log("Event:", event)
         const { name, value } = event.currentTarget
         const accountClone = { ...account }
         accountClone[name] = value
         setAccount(accountClone)
     }
-    // const handleChangePassword = (event) => {
-    //     console.log("Event:", event)
-    //     const accountClone = { ...account }
-    //     accountClone.password = event.currentTarget.value
-    //     setAccount(accountClone)
-    // }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        //Call the backend server
+        // Or any other operation
+        console.log("Submitted")
+    }
 
     return (
         <div>
             <h1>LoginForm</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
 
                 <TextInput
                     name="username"
