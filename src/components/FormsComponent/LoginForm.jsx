@@ -19,9 +19,39 @@ export default function LoginForm() {
         return Object.keys(errors).length === 0 ? null : errors;
     }
 
+    const validateProperty = (input) => {
+        if (input.name === 'username') {
+            if (input.value.trim() === '') {
+                return 'Username is required'
+            }
+        }
+        if (input.name === 'password') {
+            if (input.value.trim() === '') {
+                return 'Password is required'
+            }
+        }
+    }
+
     const handleChange = (event) => {
         // console.log("Event:", event)
         const { name, value } = event.currentTarget
+
+        const errorsClone = { ...errors }
+        const errorMessage = validateProperty(event.currentTarget)
+
+        if (errorMessage) {
+            errorsClone[name] = errorMessage
+        }
+        else {
+            delete errorsClone[name]
+        }
+
+        setErrors(errorsClone)
+
+
+
+
+
         const accountClone = { ...account }
         accountClone[name] = value
         setAccount(accountClone)
@@ -55,13 +85,16 @@ export default function LoginForm() {
                     label="Username"
                     type="text"
                     onChange={handleChange}
+                    error={errors.username}
                 />
 
                 <TextInput
                     name="password"
                     label="Password"
                     type="password"
-                    onChange={handleChange} />
+                    onChange={handleChange}
+                    error={errors.password}
+                />
 
                 <button type="submit" className="btn btn-warning btn-sm m-2">Login</button>
                 &nbsp;

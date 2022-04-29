@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function TextInput(props) {
 
-    const { name, type, label, onChange, value } = props
+    const { name, type, label, onChange, value, error } = props
     return (
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
@@ -14,6 +14,7 @@ export default function TextInput(props) {
                 onChange={onChange}
                 value={value}
             />
+           {error && <div className="alert alert-danger">{error}</div>}
         </div>
     )
 }
