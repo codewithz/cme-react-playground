@@ -54,13 +54,31 @@ export default function PostComponent() {
     }
 
     const handleDelete = async (post) => {
-        const promise = axios.delete(`${apiEndPoint}/${post.id}`)
-        const result = await promise;
+        try {
+            const promise = axios.delete(`z${apiEndPoint}/${post.id}`)
+            const result = await promise;
 
-        console.log(result)
+            console.log(result)
 
-        const updatedPosts = posts.filter(p => p.id !== post.id)
-        setPosts(updatedPosts)
+            const updatedPosts = posts.filter(p => p.id !== post.id)
+            setPosts(updatedPosts)
+        }
+        catch (error) {
+            console.log(error)
+            //  Expected Error (404:not found, 400: bad message) -- Client
+            // --> Display a specific error message
+            if (error.response && error.response.status === 404) {
+                alert("This post is already deleted")
+            }
+
+            // Unexpected Error (Network Down, Server Down, DB Down, Bug) - Server Side Errors
+            // --> Log It
+            // --> Display a generic message
+            else {
+                console.log("Logging the error:", error)
+                alert("Something went wrong!!")
+            }
+        }
     }
 
 
