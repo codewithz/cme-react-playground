@@ -20,10 +20,14 @@ export default function LoginForm() {
         console.log("Submitted")
     }
 
+    const handleReset = () => {
+        setAccount({ username: '', password: '' })
+    }
+
     return (
         <div>
             <h1>LoginForm</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} onReset={handleReset}>
 
                 <TextInput
                     name="username"
@@ -37,11 +41,14 @@ export default function LoginForm() {
                     type="password"
                     onChange={handleChange} />
 
-                <button className="btn btn-warning btn-sm m-2">Login</button>
+                <button type="submit" className="btn btn-warning btn-sm m-2">Login</button>
+                &nbsp;
+                <button type="reset" className="btn btn-warning btn-sm m-2">Reset</button>
+                &nbsp;
             </form>
 
             <p>Username:{account.username}</p>
             <p>Password:{account.password}</p>
-        </div>
+        </div >
     )
 }
