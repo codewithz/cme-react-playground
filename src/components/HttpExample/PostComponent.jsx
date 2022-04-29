@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import http from '../services/HttpService'
-
-
+import config from '../../config.json'
+import otherConfig from '../../otherConfig.json'
 
 export default function PostComponent() {
 
-    const apiEndPoint = 'https://jsonplaceholder.typicode.com/posts'
+    // const apiEndPoint = 
+    const { apiEndPoint } = config
+
+    const apiEndPoint1 = otherConfig.apiEndPoint;
+
+    const abc = config.apiEndPoint;
 
     const postsList = [
         { id: 1, title: "Title something" },
@@ -67,7 +72,7 @@ export default function PostComponent() {
 
     const handleDelete = async (post) => {
         try {
-            const promise = http.delete(`z${apiEndPoint}/${post.id}`)
+            const promise = http.delete(`${apiEndPoint}/${post.id}`)
             const result = await promise;
 
             console.log(result)
