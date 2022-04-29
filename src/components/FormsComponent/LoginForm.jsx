@@ -2,7 +2,22 @@ import React, { useState } from 'react'
 import TextInput from '../common/TextInput'
 
 export default function LoginForm() {
-    const [account, setAccount] = useState({ username: 'codewithz', password: '' })
+    const [account, setAccount] = useState({ username: '', password: '' })
+    const [errors, setErrors] = useState({})
+
+    const validate = () => {
+        const errors = {}
+
+        if (account.username.trim() === '') {
+            errors.username = 'Username is required'
+        }
+
+        if (account.password.trim() === '') {
+            errors.password = 'Password is required'
+        }
+
+        return Object.keys(errors).length === 0 ? null : errors;
+    }
 
     const handleChange = (event) => {
         // console.log("Event:", event)
@@ -14,6 +29,11 @@ export default function LoginForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        const errors = validate()
+        console.log(errors)
+
+        if (errors) return;
 
         //Call the backend server
         // Or any other operation
@@ -33,7 +53,8 @@ export default function LoginForm() {
                     name="username"
                     label="Username"
                     type="text"
-                    onChange={handleChange} />
+                    onChange={handleChange}
+                />
 
                 <TextInput
                     name="password"

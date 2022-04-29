@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function TextInput(props) {
 
-    const { name, type, label, onChange } = props
+    const { name, type, label, onChange, value } = props
     return (
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
@@ -12,6 +12,7 @@ export default function TextInput(props) {
                 id={name}
                 name={name}
                 onChange={onChange}
+                value={value}
             />
         </div>
     )
